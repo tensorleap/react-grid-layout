@@ -64,6 +64,7 @@ type Props = {
   usePercentages?: boolean,
   transformScale: number,
   droppingPosition?: DroppingPosition,
+  draggableCoreEnableUserSelectHack?: boolean,
 
   className: string,
   style?: Object,
@@ -350,6 +351,7 @@ export default class GridItem extends React.Component<Props, State> {
         }
         scale={this.props.transformScale}
         nodeRef={this.elementRef}
+        enableUserSelectHack={this.props.draggableCoreEnableUserSelectHack}
       >
         {child}
       </DraggableCore>
