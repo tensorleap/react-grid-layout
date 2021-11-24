@@ -524,7 +524,7 @@ export default class ReactGridLayout extends React.Component<Props, State> {
         isBounded={false}
         useCSSTransforms={useCSSTransforms}
         transformScale={transformScale}
-        enableUserSelectHack={draggableCoreEnableUserSelectHack}
+        draggableCoreEnableUserSelectHack={draggableCoreEnableUserSelectHack}
       >
         <div />
       </GridItem>
@@ -614,7 +614,7 @@ export default class ReactGridLayout extends React.Component<Props, State> {
         droppingPosition={isDroppingItem ? droppingPosition : undefined}
         resizeHandles={resizeHandlesOptions}
         resizeHandle={resizeHandle}
-        enableUserSelectHack={draggableCoreEnableUserSelectHack}
+        draggableCoreEnableUserSelectHack={draggableCoreEnableUserSelectHack}
       >
         {child}
       </GridItem>

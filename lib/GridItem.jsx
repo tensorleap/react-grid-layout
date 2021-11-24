@@ -120,6 +120,7 @@ export default class GridItem extends React.Component<Props, State> {
     margin: PropTypes.array.isRequired,
     maxRows: PropTypes.number.isRequired,
     containerPadding: PropTypes.array.isRequired,
+    draggableCoreEnableUserSelectHack: PropTypes.bool,
 
     // These are all in grid units
     x: PropTypes.number.isRequired,
@@ -338,20 +339,22 @@ export default class GridItem extends React.Component<Props, State> {
     child: ReactElement<any>,
     isDraggable: boolean
   ): ReactElement<any> {
+    const { handle, transformScale, draggableCoreEnableUserSelectHack } = this.props;
+
     return (
       <DraggableCore
         disabled={!isDraggable}
         onStart={this.onDragStart}
         onDrag={this.onDrag}
         onStop={this.onDragStop}
-        handle={this.props.handle}
+        handle={handle}
         cancel={
           ".react-resizable-handle" +
           (this.props.cancel ? "," + this.props.cancel : "")
         }
-        scale={this.props.transformScale}
+        scale={transformScale}
         nodeRef={this.elementRef}
-        enableUserSelectHack={this.props.draggableCoreEnableUserSelectHack}
+        enableUserSelectHack={draggableCoreEnableUserSelectHack}
       >
         {child}
       </DraggableCore>
@@ -383,8 +386,13 @@ export default class GridItem extends React.Component<Props, State> {
     const positionParams = this.getPositionParams();
 
     // This is the max possible width - doesn't go to infinity because of the width of the window
-    const maxWidth = calcGridItemPosition(positionParams, 0, 0, cols - x, 0)
-      .width;
+    const maxWidth = calcGridItemPosition(
+      positionParams,
+      0,
+      0,
+      cols - x,
+      0
+    ).width;
 
     // Calculate min/max constraints using our min & maxes
     const mins = calcGridItemPosition(positionParams, 0, 0, minW, minH);
@@ -398,7 +406,7 @@ export default class GridItem extends React.Component<Props, State> {
       <Resizable
         // These are opts for the resize handle itself
         draggableOpts={{
-          disabled: !isResizable,
+          disabled: !isResizable
         }}
         className={isResizable ? undefined : "react-resizable-hide"}
         width={position.width}
