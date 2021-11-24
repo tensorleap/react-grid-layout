@@ -6,3 +6,6 @@ npm-debug.log
 
 flow-typed/
 .husky/
+
+dist/
+build/
